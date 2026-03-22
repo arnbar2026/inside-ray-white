@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inside Ray White</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #1a1a1a;
+      --mid: #2a2a2a;
+      --gold: #c9a84c;
+      --cream: #f0e8d8;
+      --muted: #888;
+      --text: #d8cfc4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 1.15rem;
+      line-height: 1.75;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.95);
+      border-bottom: 1px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2.5rem;
+    }
+    nav a.brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero { text-align: center; padding: 5rem 2rem 3rem; }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      color: var(--cream);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+    }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+
+    /* BANNER */
+    .banner {
+      width: 100%;
+      max-width: 960px;
+      margin: 2rem auto;
+      display: block;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+    }
+    .banner img { width: 100%; display: block; opacity: 0.92; }
+
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+      font-size: 1.05rem;
+      padding: 1rem 2rem 3rem;
+    }
+    .subtitle em { color: var(--text); font-style: normal; }
+
+    /* SECTIONS */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    section + section { border-top: 1px solid #222; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--cream);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    p { margin-bottom: 1.2rem; }
+
+    /* VIDEO EMBEDS */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* NARRATION VIDEO */
+    .narration-video { margin: 2.5rem 0; }
+    .narration-video .video-caption {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* VIDEOS SECTION */
+    #videos { max-width: 1100px; }
+
+    .featured-video { margin: 2.5rem 0; }
+    .featured-label {
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+    .featured-label h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      font-weight: 400;
+    }
+    .featured-label .tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .video-card .video-wrap { border: 1px solid #2a2a2a; }
+    .video-card .card-label {
+      padding: 0.7rem 0 0.2rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .video-card .card-label h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--cream);
+      font-weight: 400;
+    }
+    .video-card .badge {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid #444;
+      padding: 0.1rem 0.5rem;
+      border-radius: 2px;
+    }
+    .video-card .card-sublabel {
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-top: 0.15rem;
+    }
+    .video-card .card-sublabel.plain {
+      font-style: normal;
+      color: var(--muted);
+    }
+
+    /* ABOUT RAY */
+    #about-ray img {
+      width: 100%;
+      max-width: 480px;
+      display: block;
+      margin: 2.5rem auto 0;
+      border: 1px solid #333;
+      opacity: 0.88;
+    }
+    .ray-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .ray-meta-item { border-left: 2px solid var(--gold); padding-left: 1rem; }
+    .ray-meta-item .meta-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ray-meta-item .meta-val { font-size: 0.95rem; color: var(--cream); }
+
+    /* CONVERSATIONS */
+    #conversations { text-align: center; }
+    #conversations p { max-width: 560px; margin: 0 auto 1.2rem; }
+    .coming-soon {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid #333;
+      padding: 0.5rem 1.5rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #222;
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+    footer strong {
+      display: block;
+      color: var(--muted);
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0.75rem 1.2rem; }
+      nav ul { gap: 1rem; }
+      .hero { padding: 3rem 1.2rem 2rem; }
+      section { padding: 3rem 1.2rem; }
+      .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="brand" href="#">Inside Ray White</a>
+    <ul>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#about-arnold">About</a></li>
+      <li><a href="#about-ray">Ray White</a></li>
+      <li><a href="#conversations">Conversations</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Inside <em>Ray White</em></h1>
+  </div>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <img src="ggfuji.png" alt="Arnold Baruch and Ray White — Golden Gate and Mt. Fuji" />
+  </div>
+
+  <p class="subtitle">Visual interpretations of Ray's music by <em>Arnold Baruch</em> — seen from across the Pacific.</p>
+
+  <!-- VIDEOS + STORY SECTION -->
+  <section id="videos" style="max-width: 1100px;">
+    <div class="section-label">The Story</div>
+    <h2>The Videos</h2>
+
+    <p>In 2023, I discovered Ray's album <em>Wrinkle In The Plan</em>. I had been out of contact with Ray for literally 50 years, ever since the days when we were both playing in a San Francisco band called The Brothers And. We spent about three years making music — eventually leading to the release of Ray's song, <em>Ain't Gonna Kill the Spirit</em>, with national airplay and a near-miss at the big time. Hearing Ray's voice and unfettered, authentic personality on his new originals after all those years touched me deeply, and it motivated me to create some videos to bring Ray's songs to life visually. After chatting with Ray online, I added some sax and flute solos and horn parts to flesh out his tracks. I hope we can bring more of his new material to life in this way. The true voice of Ray White is a bright light in troubled times.</p>
+
+    <!-- NARRATION VIDEO -->
+    <div class="narration-video">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/h-ISkgIpz9w" title="Narration — Arnold Baruch" allowfullscreen></iframe>
+      </div>
+      <div class="video-caption">Narration — Arnold Baruch</div>
+    </div>
+
+    <!-- FEATURED: Angels -->
+    <div class="featured-video">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/6e0NformgSY" title="Angels" allowfullscreen></iframe>
+      </div>
+      <div class="featured-label">
+        <h3>Angels</h3>
+        <span class="tag">Featured · original arrangement</span>
+      </div>
+    </div>
+
+    <!-- VIDEO GRID -->
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/dCYN6UzYr_U" title="Sensitive Skin" allowfullscreen></iframe>
+        </div>
+        <div class="card-label"><h3>Sensitive Skin</h3></div>
+        <div class="card-sublabel">From <em>Wrinkle In The Plan</em></div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/nELJ5twP92s" title="Sheba's Delight" allowfullscreen></iframe>
+        </div>
+        <div class="card-label"><h3>Sheba's Delight</h3></div>
+        <div class="card-sublabel">From <em>Wrinkle In The Plan</em></div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/uDmln_n48ow" title="Finding The Way Back Home" allowfullscreen></iframe>
+        </div>
+        <div class="card-label"><h3>Finding The Way Back Home</h3></div>
+        <div class="card-sublabel">From <em>Wrinkle In The Plan</em></div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/xpG93vgNpeo" title="Bells In Motion" allowfullscreen></iframe>
+        </div>
+        <div class="card-label">
+          <h3>Bells In Motion</h3>
+          <span class="badge">Personal favorite</span>
+        </div>
+        <div class="card-sublabel">From <em>Wrinkle In The Plan</em></div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/EBeR-E_CMwo" title="Serene Moments" allowfullscreen></iframe>
+        </div>
+        <div class="card-label"><h3>Serene Moments</h3></div>
+        <div class="card-sublabel">From <em>Wrinkle In The Plan</em></div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/BLt0XaABiMI" title="Mr. Bluster Strikes Out" allowfullscreen></iframe>
+        </div>
+        <div class="card-label"><h3>Mr. Bluster Strikes Out</h3></div>
+        <div class="card-sublabel plain">Something New</div>
+      </div>
+
+    </div><!-- end video-grid -->
+  </section>
+
+  <!-- ABOUT RAY -->
+  <section id="about-ray">
+    <div class="section-label">Ray White</div>
+    <h2>Ray White</h2>
+    <p style="color: var(--muted); font-size: 0.85rem; letter-spacing: 0.05em;">Singer · Guitarist · Songwriter</p>
+
+    <div class="ray-meta">
+      <div class="ray-meta-item">
+        <div class="meta-title">Frank Zappa Band</div>
+        <div class="meta-val">Featured vocalist · 1976–1988</div>
+      </div>
+      <div class="ray-meta-item">
+        <div class="meta-title">Wrinkle In The Plan</div>
+        <div class="meta-val">Solo album · original songs</div>
+      </div>
+      <div class="ray-meta-item">
+        <div class="meta-title">Ain't Gonna Kill The Spirit</div>
+        <div class="meta-val">National airplay · Chess Records · 1972</div>
+      </div>
+    </div>
+
+    <p>Ray Shirley White is a singer and guitarist whose voice became central to some of the most adventurous music of the 1970s and 80s. Born in the American south, his journey took him through the heart of America and its music before landing him on stage with Frank Zappa, where he became a featured performer across some of Zappa's most celebrated touring years.</p>
+
+    <p>But Ray has always been someone else: a thoughtful songwriter with a unique voice of his own. The songs on his album <em>Wrinkle In The Plan</em> — soulful, warm, politically awake, and deeply personal — represent an artist who never stopped growing. These videos exist to bring those songs the visual life they deserve.</p>
+
+    <p style="color: var(--muted); font-size: 0.88rem; font-style: italic;">Mississippi · Chicago · San Francisco · Las Vegas · Texas — A life lived across American music</p>
+
+    <img src="lkj.jpg" alt="Ray White performing live" />
+    <p style="text-align:center; color: var(--muted); font-size: 0.82rem; margin-top: 0.5rem;">Ray White · live</p>
+  </section>
+
+  <!-- CONVERSATIONS -->
+  <section id="conversations">
+    <div class="section-label">Conversations</div>
+    <h2>The songs deserve to be heard in their maker's voice</h2>
+    <p>This space is reserved for something still becoming — conversations with Ray about the songs, the stories behind them, and what fifty years looks like from both sides of the Pacific.</p>
+    <p>A Zoom interview series. A podcast. An archive of a friendship and a musical history that nearly got lost.</p>
+    <span class="coming-soon">Coming soon</span>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>Inside Ray White</strong>
+    Visual interpretations of Ray's music by Arnold Baruch — seen from across the Pacific.
+    <br/>© 2025
+  </footer>
+
+</body>
+</html>
